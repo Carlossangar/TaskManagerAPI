@@ -14,18 +14,15 @@ public class TareaConverter {
 		tareaModel.setDescripcion(tarea.getDescripcion());
 		tareaModel.setEstado(tarea.getEstado());
 		tareaModel.setFechaCreacion(tarea.getFechaCreacion());
-		tareaModel.setUsuario(tarea.getUsuario());
 		return tareaModel;
 	}
 	
 	public Tarea modelToEntity(TareaModel tareaModel) {
 		Tarea tarea = new Tarea();
-		tarea.setId(tareaModel.getId());
 		tarea.setTitulo(tareaModel.getTitulo());
 		tarea.setDescripcion(tareaModel.getDescripcion());
 		tarea.setEstado(tareaModel.getEstado());
 		tarea.setFechaCreacion(tareaModel.getFechaCreacion());
-		tarea.setUsuario(tareaModel.getUsuario());
 		return tarea;
 	}
 }
