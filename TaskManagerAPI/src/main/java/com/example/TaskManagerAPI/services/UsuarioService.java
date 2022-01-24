@@ -13,6 +13,7 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	@Autowired
 	private UsuarioConverter usuarioConverter;
 	
 	public boolean addUsuario(UsuarioModel usuarioModel) {
@@ -22,5 +23,9 @@ public class UsuarioService {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean checkUser(Usuario u) {
+		if(usuarioRepository)
 	}
 }

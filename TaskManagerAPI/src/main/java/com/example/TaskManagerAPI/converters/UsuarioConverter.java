@@ -21,7 +21,6 @@ public class UsuarioConverter {
 	//nos devuelve el entity del usuario (lo que enviaremos a la base de datos)
 	public Usuario modelToEntity(UsuarioModel usuarioModel) {
 		Usuario usuario = new Usuario();
-		usuario.setUserID(usuarioModel.getUserID());
 		usuario.setNombre(usuarioModel.getNombre());
 		usuario.setApellidos(usuarioModel.getApellidos());
 		usuario.setEmail(usuarioModel.getEmail());
