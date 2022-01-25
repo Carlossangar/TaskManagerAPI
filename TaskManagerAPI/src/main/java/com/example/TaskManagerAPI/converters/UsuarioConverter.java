@@ -10,7 +10,6 @@ public class UsuarioConverter {
 	//nos devuelde el modelo del usuario (lo que enviaremos fuera del api)
 	public UsuarioModel entityToModel(Usuario usuario) {
 		UsuarioModel usuarioModel = new UsuarioModel();
-		usuarioModel.setUserID(usuario.getUserID());
 		usuarioModel.setNombre(usuario.getNombre());
 		usuarioModel.setApellidos(usuario.getApellidos());
 		usuarioModel.setEmail(usuario.getEmail());

@@ -16,15 +16,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Usuario {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "userID")
-	private long userID;
+	@Column(name = "email")
+	private String email;
 	@Column(name = "nombre")
 	private String nombre;
 	@Column(name = "apellidos")
 	private String apellidos;
-	@Column(name = "email", unique = true)
-	private String email;
 	@Column(name = "password")
 	private String password;
 
@@ -32,13 +29,6 @@ public class Usuario {
 	@JsonManagedReference
 	List<Tarea> tareas;
 
-	public long getUserID() {
-		return userID;
-	}
-
-	public void setUserID(long userID) {
-		this.userID = userID;
-	}
 
 	public String getNombre() {
 		return nombre;

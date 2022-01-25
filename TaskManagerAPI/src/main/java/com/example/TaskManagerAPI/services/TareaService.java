@@ -2,6 +2,7 @@ package com.example.TaskManagerAPI.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,23 @@ public class TareaService {
 			listaTareasModel.add(taskModel);
 		}
 		return listaTareasModel;
+	}
+	
+	public TareaModel getTarea(long id) {
+		TareaModel tareaSolicitada = new TareaModel();
+		//Extraemos un optional de la base de datos
+		Optional<Tarea> optionalTarea = tareaRepository.findById(id);
+		//Comprobamos si existe la tarea
+		if(optionalTarea.isPresent()) {
+			//En caso de que si, devolvemos el usuario.
+			return tareaConverter.entityToModel(optionalTarea.get());
+		}
+		//En caso de que no, devolvemos un null
+		return null;
+	}
+	
+	public void actualizarTarea(TareaModel tareaModel) {
+		tareaRepository.save(tareaConverter.modelToEntity(tareaModel));
 	}
 	
 }

@@ -19,6 +19,9 @@ public class TareaConverter {
 	
 	public Tarea modelToEntity(TareaModel tareaModel) {
 		Tarea tarea = new Tarea();
+		if(tareaModel.getId()!=0) {
+			tarea.setId(tareaModel.getId());
+		}
 		tarea.setTitulo(tareaModel.getTitulo());
 		tarea.setDescripcion(tareaModel.getDescripcion());
 		tarea.setEstado(tareaModel.getEstado());

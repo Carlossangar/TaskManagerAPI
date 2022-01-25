@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 
 import com.example.TaskManagerAPI.entities.Tarea;
 import com.example.TaskManagerAPI.entities.Usuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
@@ -17,10 +18,10 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor
 public class UsuarioModel {
-	private long userID;
 	private String nombre;
 	private String apellidos;
 	private String email;
+	@JsonIgnore
 	private String password;
 	List<Tarea> tareas;
 }
