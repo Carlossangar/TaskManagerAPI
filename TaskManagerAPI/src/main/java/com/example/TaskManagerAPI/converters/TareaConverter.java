@@ -3,6 +3,7 @@ package com.example.TaskManagerAPI.converters;
 import org.springframework.stereotype.Component;
 
 import com.example.TaskManagerAPI.entities.Tarea;
+import com.example.TaskManagerAPI.entities.Usuario;
 import com.example.TaskManagerAPI.models.TareaModel;
 
 @Component
@@ -26,6 +27,9 @@ public class TareaConverter {
 		tarea.setDescripcion(tareaModel.getDescripcion());
 		tarea.setEstado(tareaModel.getEstado());
 		tarea.setFechaCreacion(tareaModel.getFechaCreacion());
+		Usuario usuario = new Usuario();
+		usuario.setEmail(tareaModel.getUsuarioModel().getEmail());
+		tarea.setUsuario(usuario);
 		return tarea;
 	}
 }

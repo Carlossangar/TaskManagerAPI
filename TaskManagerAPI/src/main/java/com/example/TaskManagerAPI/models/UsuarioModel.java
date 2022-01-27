@@ -2,10 +2,6 @@ package com.example.TaskManagerAPI.models;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.example.TaskManagerAPI.entities.Tarea;
 import com.example.TaskManagerAPI.entities.Usuario;
@@ -21,7 +17,9 @@ public class UsuarioModel {
 	private String nombre;
 	private String apellidos;
 	private String email;
-	@JsonIgnore
+	//Esto ignora el campo password pero al pasarselo lo ignoraria y lo pasaria vacio?
+	@JsonIgnore //Probar a crear un setter y añadir solo el JsonIgnoreReference en el
 	private String password;
-	List<Tarea> tareas;
+	//Tiene que ser el model o el entity? Si es el model decirselo a emirem
+	private List<TareaModel> tareas;
 }

@@ -17,5 +17,5 @@ public class TareaModel {
 	private String estado;
 	private String fechaCreacion;
 	private String descripcion;
-	private Usuario usuario;
+	private UsuarioModel usuarioModel;
 }

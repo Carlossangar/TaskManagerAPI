@@ -44,6 +44,15 @@ public class TareaService {
 		return listaTareasModel;
 	}
 	
+	public ArrayList<TareaModel> getTaskByStatus(String state){
+		List<Tarea> tareas = tareaRepository.findByEstado(state);
+		ArrayList<TareaModel> tareasModel = new ArrayList<>();
+		for (Tarea tarea : tareas) {
+			tareasModel.add(tareaConverter.entityToModel(tarea));
+		}
+		return tareasModel;
+	}
+	
 	public TareaModel getTarea(long id) {
 		TareaModel tareaSolicitada = new TareaModel();
 		//Extraemos un optional de la base de datos
@@ -61,4 +70,13 @@ public class TareaService {
 		tareaRepository.save(tareaConverter.modelToEntity(tareaModel));
 	}
 	
+	public Optional<TareaModel> deleteTarea(long id) {
+		Optional<TareaModel> resultadoTM = Optional.empty();
+		Optional<Tarea> resultado = tareaRepository.findById(id);
+		if(resultado.isPresent()) {
+			tareaRepository.delete(resultado.get());
+			resultadoTM = Optional.of(tareaConverter.entityToModel(resultado.get()));
+		}
+		return resultadoTM;
+	}
 }

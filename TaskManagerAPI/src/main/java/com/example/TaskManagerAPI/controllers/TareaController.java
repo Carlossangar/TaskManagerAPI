@@ -2,8 +2,10 @@ package com.example.TaskManagerAPI.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,21 +19,32 @@ import com.example.TaskManagerAPI.models.TareaModel;
 import com.example.TaskManagerAPI.services.TareaService;
 
 @RestController
-public class TareaControler {
+public class TareaController {
 	
 	@Autowired
 	private TareaService tareaService;
 	
 //OPERACIONES GET
+	//Get de todas las tareas.
 	@GetMapping(path="/tareas")
 	public ArrayList<TareaModel> getListaTareas(){
 		return tareaService.getTareas();
 	}
+	//Get de las tareas por un estado.
+	@GetMapping(path="/tareas/{status}")
+	public ArrayList<TareaModel> getTareasPorEstado(@PathVariable(name="status") String status){
+		if(status.equalsIgnoreCase("pendiente") || status.equalsIgnoreCase("en progreso") || status.equalsIgnoreCase("completada")) {
+			return tareaService.getTaskByStatus(status.toLowerCase());
+		} else {
+			throw new BadRequestException();
+		}
+	}
+	
 	
 //OPERACIONES POST
 	@PostMapping(path="/tarea")
 	public void postTarea(@RequestBody TareaModel tareaModel) {
-		//validacion de datos.
+		//validacion de datos. COMPLETAR CON LO QUE FALTA.
 		if(!(tareaModel.getTitulo().isBlank() || tareaModel.getDescripcion().isBlank() || tareaModel.getEstado().isBlank() || tareaModel.getFechaCreacion().isBlank())) {
 			if(!tareaService.addTarea(tareaModel)) {
 				throw new BadRequestException();
@@ -62,7 +75,16 @@ public class TareaControler {
 		throw new NotFoundException();
 	}
 //OPERACIONES DELETE
-
+	@DeleteMapping(path="/tarea/{id}")
+	public TareaModel deleteTarea(@PathVariable(name="id") long id) {
+		Optional<TareaModel> resultado = tareaService.deleteTarea(id);
+		if(resultado.isPresent()) {
+			return resultado.get();
+		} else {
+			throw new NotFoundException();
+		}
+	}
+	
 //Funciones auxiliares
 	public TareaModel buscarTarea(long id) {
 		return tareaService.getTarea(id);
