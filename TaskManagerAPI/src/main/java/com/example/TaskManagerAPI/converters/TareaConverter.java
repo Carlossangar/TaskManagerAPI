@@ -1,10 +1,12 @@
 package com.example.TaskManagerAPI.converters;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.example.TaskManagerAPI.entities.Tarea;
 import com.example.TaskManagerAPI.entities.Usuario;
 import com.example.TaskManagerAPI.models.TareaModel;
+import com.example.TaskManagerAPI.models.UsuarioModel;
 
 @Component
 public class TareaConverter {
@@ -15,6 +17,9 @@ public class TareaConverter {
 		tareaModel.setDescripcion(tarea.getDescripcion());
 		tareaModel.setEstado(tarea.getEstado());
 		tareaModel.setFechaCreacion(tarea.getFechaCreacion());
+		UsuarioModel usuarioModel = new UsuarioModel();
+		usuarioModel.setEmail(tarea.getUsuario().getEmail());
+		tareaModel.setUsuarioModel(usuarioModel);
 		return tareaModel;
 	}
 	

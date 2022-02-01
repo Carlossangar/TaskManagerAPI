@@ -39,6 +39,11 @@ public class TareaController {
 			throw new BadRequestException();
 		}
 	}
+	//Get de las tareas de un usuario.
+	@GetMapping(path="/tareasUsuario/{email}")
+	public ArrayList<TareaModel> getListaTareas(@PathVariable(name="email") String email){
+		return tareaService.getTareasUsuario(email);
+	}
 	
 	
 //OPERACIONES POST

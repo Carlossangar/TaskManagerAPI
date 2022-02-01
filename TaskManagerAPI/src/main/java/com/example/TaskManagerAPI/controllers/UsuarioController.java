@@ -27,7 +27,7 @@ public class UsuarioController {
 	@PostMapping(path="/usuario")
 	public void postUsuario(@RequestBody UsuarioModel usuarioModel) {
 		//Validacion de sus datos.
-		if(!(usuarioModel.getNombre().isBlank() || usuarioModel.getApellidos().isBlank() || usuarioModel.getEmail().isBlank() || usuarioModel.getPassword().isBlank())) {
+		if(!(usuarioModel.getNombre().isBlank() || usuarioModel.getApellidos().isBlank() || usuarioModel.getEmail().isBlank())) {
 			//Insercion del usuario.
 			if(!usuarioService.addUsuario(usuarioModel)) {
 				throw new BadRequestException();

@@ -7,6 +7,7 @@ import com.example.TaskManagerAPI.entities.Tarea;
 import com.example.TaskManagerAPI.entities.Usuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,12 @@ public class UsuarioModel {
 	private String apellidos;
 	private String email;
 	//Esto ignora el campo password pero al pasarselo lo ignoraria y lo pasaria vacio?
-	@JsonIgnore //Probar a crear un setter y añadir solo el JsonIgnoreReference en el
+	@JsonIgnore
 	private String password;
-	//Tiene que ser el model o el entity? Si es el model decirselo a emirem
 	private List<TareaModel> tareas;
+	
+	@JsonProperty
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

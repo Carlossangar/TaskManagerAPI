@@ -5,6 +5,7 @@ import javax.persistence.ManyToOne;
 
 import com.example.TaskManagerAPI.entities.Usuario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,9 @@ public class TareaModel {
 	private String fechaCreacion;
 	private String descripcion;
 	private UsuarioModel usuarioModel;
+	
+	@JsonIgnore
+	public UsuarioModel getUsuarioModel() {
+		return usuarioModel;
+	}
 }

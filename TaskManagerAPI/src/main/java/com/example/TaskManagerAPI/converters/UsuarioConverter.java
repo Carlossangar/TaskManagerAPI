@@ -1,8 +1,14 @@
 package com.example.TaskManagerAPI.converters;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.TaskManagerAPI.entities.Tarea;
 import com.example.TaskManagerAPI.entities.Usuario;
+import com.example.TaskManagerAPI.models.TareaModel;
 import com.example.TaskManagerAPI.models.UsuarioModel;
 
 @Component
@@ -13,7 +19,6 @@ public class UsuarioConverter {
 		usuarioModel.setNombre(usuario.getNombre());
 		usuarioModel.setApellidos(usuario.getApellidos());
 		usuarioModel.setEmail(usuario.getEmail());
-		usuarioModel.setTareas(usuario.getTareas());
 		return usuarioModel;
 	}
 	

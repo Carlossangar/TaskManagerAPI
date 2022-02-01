@@ -9,14 +9,18 @@ import org.springframework.stereotype.Service;
 
 import com.example.TaskManagerAPI.converters.TareaConverter;
 import com.example.TaskManagerAPI.entities.Tarea;
+import com.example.TaskManagerAPI.entities.Usuario;
 import com.example.TaskManagerAPI.models.TareaModel;
 import com.example.TaskManagerAPI.repositories.TareaRepository;
+import com.example.TaskManagerAPI.repositories.UsuarioRepository;
 
 @Service
 public class TareaService {
 
 	@Autowired
 	private TareaRepository tareaRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private TareaConverter tareaConverter;
 	
@@ -64,6 +68,20 @@ public class TareaService {
 		}
 		//En caso de que no, devolvemos un null
 		return null;
+	}
+	
+	public ArrayList<TareaModel> getTareasUsuario(String email){
+		List<Tarea> tareas = new ArrayList<>();
+		if(usuarioRepository.existsById(email)) {
+			tareas = usuarioRepository.getById(email).getTareas();
+			ArrayList<TareaModel> tareasModel = new ArrayList();
+			for (Tarea tarea : tareas) {
+				tareasModel.add(tareaConverter.entityToModel(tarea));
+			}
+			return tareasModel;
+		} else {
+			return null;
+		}
 	}
 	
 	public void actualizarTarea(TareaModel tareaModel) {
