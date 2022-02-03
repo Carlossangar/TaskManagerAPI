@@ -10,6 +10,11 @@ import com.example.TaskManagerAPI.models.UsuarioModel;
 
 @Component
 public class TareaConverter {
+	/**
+	 * Devuelve el modelo de la tarea a traves de una entidad.
+	 * @param tarea Entidad de la que tomamos los datos
+	 * @return TareaModel con los datos de la entidad.
+	 */
 	public TareaModel entityToModel(Tarea tarea) {
 		TareaModel tareaModel = new TareaModel();
 		tareaModel.setId(tarea.getId());
@@ -23,6 +28,11 @@ public class TareaConverter {
 		return tareaModel;
 	}
 	
+	/**
+	 * Devuelve la entidad de una tarea a traves de un modelo
+	 * @param tareaModel Modelo del que tomaremos los datos
+	 * @return Tarea con los datos del modelo
+	 */
 	public Tarea modelToEntity(TareaModel tareaModel) {
 		Tarea tarea = new Tarea();
 		if(tareaModel.getId()!=0) {

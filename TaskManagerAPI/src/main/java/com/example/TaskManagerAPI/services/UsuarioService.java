@@ -19,6 +19,11 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioConverter usuarioConverter;
 	
+	/**
+	 * Añade un usuario a la base de datos si no existe previamente.
+	 * @param usuarioModel Usuario que deseamos añadir a la base de datos
+	 * @return true en caso de haberse añadido correctamente y false en caso de existir en la base de datos y no poder añadirse.
+	 */
 	public boolean addUsuario(UsuarioModel usuarioModel) {
 		Usuario usuario = usuarioConverter.modelToEntity(usuarioModel);
 		if(!usuarioRepository.findById(usuario.getEmail()).isPresent()) {
@@ -28,6 +33,10 @@ public class UsuarioService {
 		return false;
 	}
 	
+	/**
+	 * Retorna todos los usuarios registrados en la base de datos.
+	 * @return ArrayList con todos los usuarios registrados en la base de datos.
+	 */
 	public ArrayList<UsuarioModel> getUsuarios(){
 		List<Usuario> usuarios = usuarioRepository.findAll();
 		ArrayList<UsuarioModel> usuariosModel = new ArrayList<>();

@@ -18,7 +18,7 @@ public class TareaModel {
 	private long id;
 	private String titulo;
 	private String estado;
-	private Date fechaCreacion;
+	private Date fechaCreacion; //"año-mes-dia 2022-02-02"
 	private String descripcion;
 	private UsuarioModel usuarioModel;
 	

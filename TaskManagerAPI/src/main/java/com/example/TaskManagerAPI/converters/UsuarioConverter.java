@@ -13,7 +13,12 @@ import com.example.TaskManagerAPI.models.UsuarioModel;
 
 @Component
 public class UsuarioConverter {
-	//nos devuelde el modelo del usuario (lo que enviaremos fuera del api)
+	
+	/**
+	 * Devuelve el modelo del usuario a traves de una entidad.
+	 * @param usuario Entidad de la que tomamos los datos
+	 * @return UsuarioModel con los datos de la entidad,
+	 */
 	public UsuarioModel entityToModel(Usuario usuario) {
 		UsuarioModel usuarioModel = new UsuarioModel();
 		usuarioModel.setNombre(usuario.getNombre());
@@ -22,7 +27,11 @@ public class UsuarioConverter {
 		return usuarioModel;
 	}
 	
-	//nos devuelve el entity del usuario (lo que enviaremos a la base de datos)
+	/**
+	 * Devuelve la entidad de un usuario a traves de un modelo.
+	 * @param usuarioModel Modelo del que tomaremos los datos
+	 * @return Usuario con los datos del modelo.
+	 */
 	public Usuario modelToEntity(UsuarioModel usuarioModel) {
 		Usuario usuario = new Usuario();
 		usuario.setNombre(usuarioModel.getNombre());

@@ -81,14 +81,14 @@ public class TareaController {
 	@PutMapping(path = "/estadoTarea")
 	public TareaModel putEstadoTarea(@RequestBody TareaModel tareaModel) {
 		//Buscamos la tarea.
-		TareaModel tareaAntigua = buscarTarea(tareaModel.getId());
+		Optional<TareaModel> tareaAntigua = buscarTarea(tareaModel.getId());
 		//comprobamos que existe
-		if(tareaAntigua!=null) {
+		if(tareaAntigua.isPresent()) {
 			//Si existe comprobamos que el estado es una de las opciones correctas.
 			if(tareaModel.getEstado().equalsIgnoreCase("pendiente")||tareaModel.getEstado().equalsIgnoreCase("en progreso")||tareaModel.getEstado().equalsIgnoreCase("completada")) {
-				tareaAntigua.setEstado(tareaModel.getEstado());
-				tareaService.actualizarTarea(tareaAntigua);
-				return tareaAntigua;
+				tareaAntigua.get().setEstado(tareaModel.getEstado());
+				tareaService.actualizarTarea(tareaAntigua.get());
+				return tareaAntigua.get();
 			} else {
 				//Si no, devolvemos bad request
 				throw new BadRequestException();
@@ -119,7 +119,7 @@ public class TareaController {
 	 * @param id identificador de la tarea que deseamos buscar.
 	 * @return TareaModel con los datos de la tarea solicitada por el usuario.
 	 */
-	public TareaModel buscarTarea(long id) {
+	public Optional<TareaModel> buscarTarea(long id) {
 		return tareaService.getTarea(id);
 	}
 }

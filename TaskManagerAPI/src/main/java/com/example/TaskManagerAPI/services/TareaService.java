@@ -38,6 +38,10 @@ public class TareaService {
 		return false;
 	}
 	
+	/**
+	 * Funcion que devuelve una lista de todas las tareas de la base de datos.
+	 * @return ArrayList de tipo TareaModel que contiene todas las tareas publicadas en la base de datos.
+	 */
 	public ArrayList<TareaModel> getTareas(){
 		List<Tarea> tareas = tareaRepository.findAll();
 		ArrayList<TareaModel> listaTareasModel = new ArrayList<>();
@@ -48,6 +52,11 @@ public class TareaService {
 		return listaTareasModel;
 	}
 	
+	/**
+	 * Devuelve una lista de todas las tareas que se encuentran bajo un estado en especifico.
+	 * @param state Estado de la tarea por el que las vamos a filtrar.
+	 * @return ArrayList de tipo TareaModel con todas las tareas filtradas por su estado.
+	 */
 	public ArrayList<TareaModel> getTaskByStatus(String state){
 		List<Tarea> tareas = tareaRepository.findByEstado(state);
 		ArrayList<TareaModel> tareasModel = new ArrayList<>();
@@ -57,19 +66,29 @@ public class TareaService {
 		return tareasModel;
 	}
 	
-	public TareaModel getTarea(long id) {
-		TareaModel tareaSolicitada = new TareaModel();
+	/**
+	 * Devuelve una tarea en especifico que buscamos por su id
+	 * @param id Identificador de la tarea por la que lo buscamos
+	 * @return Optional<TareaModel> encontrada con ese id o vacio.
+	 */
+	public Optional<TareaModel> getTarea(long id) {
+		Optional<TareaModel> tareaSolicitada = Optional.empty();
 		//Extraemos un optional de la base de datos
 		Optional<Tarea> optionalTarea = tareaRepository.findById(id);
 		//Comprobamos si existe la tarea
 		if(optionalTarea.isPresent()) {
 			//En caso de que si, devolvemos el usuario.
-			return tareaConverter.entityToModel(optionalTarea.get());
+			tareaSolicitada = Optional.of(tareaConverter.entityToModel(optionalTarea.get()));
 		}
 		//En caso de que no, devolvemos un null
-		return null;
+		return tareaSolicitada;
 	}
 	
+	/**
+	 * Devuelve las tareas asignadas a un usuario en concreto.
+	 * @param email Clave por la que filtraremos las tareas.
+	 * @return ArrayList con las TareaModel que tiene asignadas un usuario.
+	 */
 	public ArrayList<TareaModel> getTareasUsuario(String email){
 		List<Tarea> tareas = new ArrayList<>();
 		if(usuarioRepository.existsById(email)) {
@@ -84,10 +103,19 @@ public class TareaService {
 		}
 	}
 	
+	/**
+	 * Actualiza la tarea a traves del repositorio
+	 * @param tareaModel Tarea que vamos a actualizar
+	 */
 	public void actualizarTarea(TareaModel tareaModel) {
 		tareaRepository.save(tareaConverter.modelToEntity(tareaModel));
 	}
 	
+	/**
+	 * Elimina una tarea de la base de datos.
+	 * @param id Identificador a traves del que buscamos la tarea.
+	 * @return Optional<TareaModel> con la tarea eliminada o vacio.
+	 */
 	public Optional<TareaModel> deleteTarea(long id) {
 		Optional<TareaModel> resultadoTM = Optional.empty();
 		Optional<Tarea> resultado = tareaRepository.findById(id);
