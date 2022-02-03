@@ -1,5 +1,7 @@
 package com.example.TaskManagerAPI.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,7 @@ public class Tarea {
 	@Column(name = "estado")
 	private String estado;
 	@Column(name = "fechaCreacion")
-	private String fechaCreacion;
+	private Date fechaCreacion;
 	@Column(name = "descripcion")
 	private String descripcion;
 

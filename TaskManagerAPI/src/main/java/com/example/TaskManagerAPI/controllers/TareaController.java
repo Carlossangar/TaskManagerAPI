@@ -25,12 +25,19 @@ public class TareaController {
 	private TareaService tareaService;
 	
 //OPERACIONES GET
-	//Get de todas las tareas.
+	/**
+	 * Pide al service todas las tareas.
+	 * @return ArrayList<TareaModel> con todas las tareas.
+	 */
 	@GetMapping(path="/tareas")
 	public ArrayList<TareaModel> getListaTareas(){
 		return tareaService.getTareas();
 	}
-	//Get de las tareas por un estado.
+	/**
+	 * Pide al service todas las tareas con un mismo estado.
+	 * @param status Estado de la tarea por la que filtraremos
+	 * @return ArrayList<TareaModel> con las tareas que tienen su mismo estado.
+	 */
 	@GetMapping(path="/tareas/{status}")
 	public ArrayList<TareaModel> getTareasPorEstado(@PathVariable(name="status") String status){
 		if(status.equalsIgnoreCase("pendiente") || status.equalsIgnoreCase("en progreso") || status.equalsIgnoreCase("completada")) {
@@ -39,18 +46,25 @@ public class TareaController {
 			throw new BadRequestException();
 		}
 	}
-	//Get de las tareas de un usuario.
+	/**
+	 * Pide al service todas las tareas de un usuario.
+	 * @param email ID del empleado
+	 * @return ArrayList<TareaModel> con las tareas de un usuario.
+	 */
 	@GetMapping(path="/tareasUsuario/{email}")
 	public ArrayList<TareaModel> getListaTareas(@PathVariable(name="email") String email){
 		return tareaService.getTareasUsuario(email);
 	}
 	
 	
-//OPERACIONES POST
+	/**
+	 * Manda al service una tarea para que sea registrada en el sistema.
+	 * @param tareaModel Body de la peticion con los datos de la tarea.
+	 */
 	@PostMapping(path="/tarea")
 	public void postTarea(@RequestBody TareaModel tareaModel) {
 		//validacion de datos. COMPLETAR CON LO QUE FALTA.
-		if(!(tareaModel.getTitulo().isBlank() || tareaModel.getDescripcion().isBlank() || tareaModel.getEstado().isBlank() || tareaModel.getFechaCreacion().isBlank())) {
+		if(!( tareaModel.getTitulo().isBlank() || tareaModel.getDescripcion().isBlank() || tareaModel.getEstado().isBlank() )) {
 			if(!tareaService.addTarea(tareaModel)) {
 				throw new BadRequestException();
 			}
@@ -59,7 +73,11 @@ public class TareaController {
 		}
 		
 	}
-//OPERACIONES PUT
+	/**
+	 * Manda al service una tarea para que sea modificada en la base de datos.
+	 * @param tareaModel Body de la peticion con los datos de la tarea.
+	 * @return TareaModel modificada.
+	 */
 	@PutMapping(path = "/estadoTarea")
 	public TareaModel putEstadoTarea(@RequestBody TareaModel tareaModel) {
 		//Buscamos la tarea.
@@ -79,7 +97,12 @@ public class TareaController {
 		//Si no existe devolvemos not found
 		throw new NotFoundException();
 	}
-//OPERACIONES DELETE
+	
+	/**
+	 * Solicita al service que se elimine la tarea.
+	 * @param id identificador de la tarea para buscarla en la base de datos.
+	 * @return TareaModel que se elimino.
+	 */
 	@DeleteMapping(path="/tarea/{id}")
 	public TareaModel deleteTarea(@PathVariable(name="id") long id) {
 		Optional<TareaModel> resultado = tareaService.deleteTarea(id);
@@ -91,6 +114,11 @@ public class TareaController {
 	}
 	
 //Funciones auxiliares
+	/**
+	 * Funcion que busca en el service una tarea por su identificador
+	 * @param id identificador de la tarea que deseamos buscar.
+	 * @return TareaModel con los datos de la tarea solicitada por el usuario.
+	 */
 	public TareaModel buscarTarea(long id) {
 		return tareaService.getTarea(id);
 	}

@@ -1,5 +1,7 @@
 package com.example.TaskManagerAPI.models;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 
@@ -16,7 +18,7 @@ public class TareaModel {
 	private long id;
 	private String titulo;
 	private String estado;
-	private String fechaCreacion;
+	private Date fechaCreacion;
 	private String descripcion;
 	private UsuarioModel usuarioModel;
 	

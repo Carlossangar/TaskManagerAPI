@@ -19,11 +19,20 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	
 	//GET
+	/**
+	 * Solicita al service una lista con todos los usuarios registrados.
+	 * @return List<UsuarioModel> con todos los usuarios registrados en la base de datos.
+	 */
 	@GetMapping(path="/usuarios")
 	public List<UsuarioModel> getUsuarios(){
 		return usuarioService.getUsuarios();
 	}
+	
 	//POST
+	/**
+	 * Envia al service un nuevo usuario para que lo registre.
+	 * @param usuarioModel contiene los datos del uusuario que vamos a registrar.
+	 */
 	@PostMapping(path="/usuario")
 	public void postUsuario(@RequestBody UsuarioModel usuarioModel) {
 		//Validacion de sus datos.
