@@ -18,7 +18,6 @@ public class UsuarioModel {
 	private String nombre;
 	private String apellidos;
 	private String email;
-	//Esto ignora el campo password pero al pasarselo lo ignoraria y lo pasaria vacio?
 	@JsonIgnore
 	private String password;
 	private List<TareaModel> tareas;

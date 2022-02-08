@@ -22,7 +22,7 @@ public class TareaModel {
 	private String descripcion;
 	private UsuarioModel usuarioModel;
 	
-	@JsonIgnore
+	
 	public UsuarioModel getUsuarioModel() {
 		return usuarioModel;
 	}

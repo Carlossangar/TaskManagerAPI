@@ -56,7 +56,7 @@ public class TareaController {
 		return tareaService.getTareasUsuario(email);
 	}
 	
-	
+//POST
 	/**
 	 * Manda al service una tarea para que sea registrada en el sistema.
 	 * @param tareaModel Body de la peticion con los datos de la tarea.
@@ -73,6 +73,8 @@ public class TareaController {
 		}
 		
 	}
+	
+//PUT
 	/**
 	 * Manda al service una tarea para que sea modificada en la base de datos.
 	 * @param tareaModel Body de la peticion con los datos de la tarea.
@@ -98,6 +100,7 @@ public class TareaController {
 		throw new NotFoundException();
 	}
 	
+//DELETE
 	/**
 	 * Solicita al service que se elimine la tarea.
 	 * @param id identificador de la tarea para buscarla en la base de datos.
