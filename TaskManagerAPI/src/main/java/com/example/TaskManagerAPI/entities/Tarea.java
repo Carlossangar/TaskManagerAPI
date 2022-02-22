@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -36,6 +39,7 @@ public class Tarea {
 	@ManyToOne
 	@JsonBackReference
 	@JsonIgnoreProperties({"tareas"})
-	Usuario usuario;
+	//@Cascade(CascadeType.ALL)
+	Usuario usuario;	
 
 }
